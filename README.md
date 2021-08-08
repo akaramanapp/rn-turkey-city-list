@@ -15,7 +15,7 @@ import RnTurkeyCityList from "rn-turkey-city-list";
 
 // ...
 
-const result = await RnTurkeyCityList.multiply(3, 7);
+const result = await RnTurkeyCityList.getCities();
 ```
 
 ## Contributing

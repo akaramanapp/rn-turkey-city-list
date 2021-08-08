@@ -1,18 +1,24 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import RnTurkeyCityList from 'rn-turkey-city-list';
+import CityList from 'rn-turkey-city-list';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [result, setResult] = React.useState<object | undefined>();
 
   React.useEffect(() => {
-    RnTurkeyCityList.multiply(3, 7).then(setResult);
+    CityList.getCities().then((data) => {
+      setResult(data)
+    })
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      {
+        result ? result.map((item: { id: String, name: String; }) => {
+          return <Text key={item.id} style={{ margin: 5 }}>{item.name}</Text>
+        }) : null
+      }
     </View>
   );
 }
@@ -22,10 +28,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
+  }
 });
